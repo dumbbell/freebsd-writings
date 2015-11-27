@@ -1,0 +1,17 @@
+Today, FreeBSD is well behind Linux in the graphics stack area, but the
+community regains interest in the topic. Users want a beautiful and
+friendly desktop environment on their shiny new laptop, they want to try
+this Wayland thing all their Linux buddies talk about, and above all,
+they want to mine virtual currency and be rich!
+
+But all of this comes with a price: contributors and users hit critical
+problems due to the gap with Linux. Some of them are technical, some are
+human. Right now, the Linux community leads developments and we need to
+learn again how the graphics stack work from top to bottom.
+
+After a short history of major changes, the presentation goes through
+the current situation in the kernel, the packages and with our users.
+It then concludes with the actions taken and planned to restore a nice
+desktop experience on FreeBSD and, in the long term, be part of the
+developments, side by side with not only the Linux community but other
+platforms too.

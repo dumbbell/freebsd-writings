@@ -1,0 +1,450 @@
+% $Header: /Users/joseph/Documents/LaTeX/beamer/solutions/conference-talks/conference-ornate-20min.en.tex,v 90e850259b8b 2007/01/28 20:48:30 tantau $
+
+\documentclass{beamer}
+
+% This file is a solution template for:
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 20min.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice.
+
+
+\mode<presentation>
+{
+  \usetheme{Dresden}
+  \usecolortheme{beaver}
+
+  \setbeamercovered{transparent}
+}
+
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+\usepackage{alltt}
+\usepackage{hyperref}
+\usepackage{soul}
+
+\title[Graphics Stack on FreeBSD] % (optional, use only with long paper titles)
+{Status of the Graphics Stack on FreeBSD}
+
+%\subtitle
+%{Include Only If Paper Has a Subtitle}
+
+\author[J.S.~Pédron] % (optional, use only with lots of authors)
+{Jean-Sébastien~Pédron}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[FreeBSD] % (optional, but mostly needed)
+{
+  The FreeBSD Project}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[XDC 2014] % (optional, should be abbreviation of conference name)
+{The X.Org Developer's Conference, 2014}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+%\subject{Theoretical Computer Science}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=0.5cm]{freebsd-logo}{freebsd-logo}
+\logo{\pgfuseimage{freebsd-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%\begin{frame}{Outline}
+%  \tableofcontents
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+
+\begin{frame}{Introduction}
+  \begin{block}{Structure of this presentation}
+    \begin{itemize}
+      \item Our major problems
+      \item For each problem, planned solutions
+    \end{itemize}
+  \end{block}
+  \begin{block}{For the 2 or 3 people in the room not using FreeBSD}
+    \begin{itemize}
+      \item Description of FreeBSD-specific concepts
+      \item \textbf{Stop me if something is unclear!}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{In the kernel}
+
+\subsection{A bit of history}
+
+\begin{frame}{A bit of history}
+  \begin{block}{The era before KMS}
+    \begin{itemize}
+      \item Originally: DRM shared with Linux and others
+      \item Maintained by Eric Anholt
+    \end{itemize}
+  \end{block}
+  \pause
+  \begin{block}{Then, KMS became mandatory}
+    \begin{itemize}
+      \item Newer Intel GPUs only supported by the kernel driver
+      \item Radeon GPUs to follow
+      \item FreeBSD didn't participate in the development
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{2012: import of i915 KMS driver}
+  \begin{itemize}
+    \item Copy of the old DRM code \\
+      \texttt{sys/dev/drm} $\rightarrow$ \texttt{sys/dev/drm2}
+    \item Import of i915 from Linux 3.2 (?)
+    \item Only features required by i915 added to DRM device-independent code
+    \item Linux APIs and data structures replaced by FreeBSD's ones
+    \item Available in FreeBSD 9.1
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{2013: import of Radeon KMS driver}
+  \begin{itemize}
+    \item Import of TTM and Radeon from Linux 3.8
+    \item Some additions to DRM device-independent code
+    \item Linux APIs and data structures replaced by FreeBSD's ones
+    \item Available in FreeBSD 9.3
+  \end{itemize}
+\end{frame}
+
+\subsection{Drivers maintenance}
+
+\begin{frame}{Gratuitous changes all over the place}
+  \begin{itemize}
+    \item Usage of FreeBSD APIs and data structures
+    \item Incomplete implementation of DRM
+    \item Some variables renamed
+  \end{itemize}
+  $\Rightarrow$ Very hard to import new code from Linux
+\end{frame}
+
+\begin{frame}{Resuming work}
+  \begin{block}{What's ready}
+    \begin{itemize}
+      \item Update to i915 close to completion
+      \item Sync DRM device-independent code with Linux 3.8 ready
+    \end{itemize}
+  \end{block}
+  \begin{block}{In the longer term}
+    \begin{itemize}
+      \item Plan to use a Linux API wrapper to ease the work \\
+        Caveat: need to convince people
+      \item Get rid of the code duplication (\texttt{drm} vs. \texttt{drm2}
+        directories)
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{In the Ports tree}
+
+\subsection{What is the Ports tree?}
+
+\begin{frame}{The Ports tree}
+  \begin{block}{What is the Ports tree?}
+    \begin{itemize}
+      \item Packaging of 3rd-party applications
+      \item Repository of \texttt{Makefile}s and patches
+      \item Equivalent of \texttt{debian} directories or \texttt{.spec} files
+    \end{itemize}
+  \end{block}
+  \pause
+  \begin{block}{How to install a port}
+    \begin{alltt}
+      cd /usr/ports/x11-servers/xorg-server \\
+      make all install clean
+    \end{alltt}
+  \end{block}
+  (higher-level tools are available)
+\end{frame}
+
+\begin{frame}{The Ports tree}
+  \begin{itemize}
+    \item Unique tree for all supported releases of FreeBSD
+    \item Pro: All releases have access to recent applications
+    \item Con: A package needs to handle missing features in older releases
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{The Ports tree}
+  \begin{itemize}
+    \item Historically: distribution of the Ports tree
+      \pause
+    \item For a year: transition to binary packages as 1st class citizen
+      \pause
+    \item Require many changes in the Ports tree and in habits
+      \pause
+    \item Missing features \\
+      For us, a \texttt{Provides}-like mechanism
+  \end{itemize}
+\end{frame}
+
+\subsection{Video drivers in FreeBSD releases}
+
+\begin{frame}{KMS drivers in FreeBSD}
+  \begin{tabular}{rrrlr}
+    \hline
+    \textbf{FreeBSD} & \textbf{Release} & \textbf{EOL} & \textbf{Drivers} \\
+    \hline
+    8.4 & Jun 2014 & Jun 2015 & (none) \\
+    \pause
+    9.1 & Dec 2012 & Dec 2014 & i915 \\
+    9.2 & Sep 2013 & Dec 2014 & i915 \\
+    9.3 & Jul 2014 & Dec 2016 & i915, Radeon \\
+    \pause
+    10.0 & Jan 2014 & Jan 2015 & i915, Radeon \\
+    \pause
+    10.1 & Q4 2014 & & i915 + HW context, Radeon \\
+    \hline
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{The graphics stack in the Ports tree}
+  \begin{tabular}{rllll}
+    \hline
+    \textbf{FreeBSD} & \textbf{xserver} & \textbf{Intel DDX} & \textbf{ATI DDX} & \textbf{Mesa} \\
+    \hline
+    8.4 & 1.7 & 2.7 & 6.14 & 7.6 \\
+    \pause
+    9.1 & 1.12 & 2.21 & 6.14 & 9.1 \\
+    9.2 & 1.12 & 2.21 & 6.14 & 9.1 \\
+    9.3 & 1.12 & 2.21 & 7.x & 9.1 \\
+    10.0 & 1.12 & 2.21 & 7.x & 9.1 \\
+    \pause
+    10.1 & 1.12 & 2.21 & 7.x & (any) \\
+    \hline
+  \end{tabular}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Remember}
+    \begin{itemize}
+      \item One tree to support all releases
+      \item No \texttt{Provides}-like feature
+    \end{itemize}
+  \end{block}
+  $\Rightarrow$ "Solution" (as in ugly workaround): \texttt{WITH\_NEW\_XORG}
+\end{frame}
+
+\subsection{The WITH\_NEW\_XORG mess}
+
+\begin{frame}{WITH\_NEW\_XORG: how it works}
+  \begin{itemize}
+    \item Build-time flag in the Ports tree
+    \item Select between two sets:
+      \par
+      \vspace{1em}
+      \begin{tabular}{ll}
+        \hline
+        \textbf{\texttt{WITHOUT\_NEW\_XORG}} & \textbf{\texttt{WITH\_NEW\_XORG}} \\
+        \hline
+        xserver 1.7 & xserver 1.12 \\
+        xf86-video-intel 2.7 & xf86-video-intal 2.21 \\
+        xf86-video-ati 6.x & xf86-video-ati 7.x \\
+        Mesa 7.6 & Mesa 9.1 \\
+        \hline
+      \end{tabular}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{WITH\_NEW\_XORG: how it \st{works} doesn't work}
+  \begin{itemize}
+    \item Build-time: unsuitable for a binary packages repository
+      \pause
+    \item Bind two unrelated applications: xserver and Mesa
+      \pause
+    \item Nightmare to maintain
+      \pause
+    \item Very confusing for end users
+      \pause
+    \item Only solution until \texttt{Provides} feature is implemented
+  \end{itemize}
+  $\Rightarrow$ A fiasco for both developers and end users
+\end{frame}
+
+\begin{frame}{WITH\_NEW\_XORG: about to be removed!}
+  \begin{itemize}
+    \item Way too expensive to maintain
+    \item Cripple progress on today's software/hardware
+    \item Cairo 1.12 + xf86-video-intel 2.7 already crash X
+    \item Took a long time to convince people...
+  \end{itemize}
+\end{frame}
+
+\section{With the community}
+
+\begin{frame}{Our team}
+  \begin{block}{Small}
+    \begin{itemize}
+      \item Two developers in the kernel
+      \item Two developers in the ports
+      \item Not all fully dedicated to the graphics stack
+    \end{itemize}
+  \end{block}
+  \begin{block}{Still learning}
+    \begin{itemize}
+      \item Lack of X11 expertise and understanding of hardware
+      \item Low confidence in what we do sometimes
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Users are afraid of changes}
+  \begin{itemize}
+    \item Big rocky jumps instead of small incremental changes \\
+      Example: xserver 1.7/Mesa 7.6 $\rightarrow$ xserver 1.12/Mesa 9.1
+    \item We don't teach our users \\
+      Example: Why are video drivers moved to the kernel?
+    \item Many FreeBSD developers use Mac OS X
+  \end{itemize}
+  $\Rightarrow$ Gives a bad impression
+\end{frame}
+
+\begin{frame}{No relation with upstream}
+  \begin{itemize}
+    \item Little effort to talk and work with you
+    \item Only consuming, almost no contribution
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Talking about what we do}
+  \begin{block}{Existing tools}
+    \begin{itemize}
+      \item A wiki section dedicated to the graphics stack
+      \item Quarterly status reports
+      \item Increased presence on mailing-lists and IRC
+    \end{itemize}
+  \end{block}
+  \begin{block}{Explore more methods}
+    \begin{itemize}
+      \item Improve bug reports handling
+      \item Increase publications, maybe on a blog?
+      \item Teach users
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Future challenges}
+
+\begin{frame}{The KMS drivers}
+  \begin{itemize}
+    \item Finish to sync DRM and drivers with Linux 3.8
+    \item Sync with later Linux release (3.10?)
+    \item Implement dmabuf/PRIME
+    \item Import Nouveau as time permits
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{GPGPU and OpenCL}
+  \begin{itemize}
+    \item Continue the work on an alternative to udev
+    \item Finish packaging of libgbm and Clover
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Root-less X server}
+  \begin{itemize}
+    \item Work on an alternative to systemd-logind?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Wayland and Weston}
+  \begin{itemize}
+    \item Help with the evdev GSoC
+    \item Finish packaging of Wayland
+    \item Port libinput
+    \item Port Weston
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Working again with you all!}
+  \begin{itemize}
+    \item Contribute code
+    \item Talk with you
+    \item Come back to XDC
+  \end{itemize}
+\end{frame}
+
+\section*{Summary}
+
+\begin{frame}{For further reading}
+  \begin{thebibliography}{10}
+
+  \beamertemplatearticlebibitems
+
+  \bibitem{FreeBSDWikiGraphics}
+    Our wiki section.
+    \newblock Roadmap, projects' status and contact information.
+    \newblock \url{https://wiki.freebsd.org/Graphics}
+  \end{thebibliography}
+
+\end{frame}
+
+\begin{frame}{Summary}
+  \begin{itemize}
+    \item Get rid of the legacy graphics stack in the Ports tree
+    \item Ease the work in the kernel
+    \item Improve our communication skills
+    \item Work with you
+  \end{itemize}
+\end{frame}
+
+\end{document}

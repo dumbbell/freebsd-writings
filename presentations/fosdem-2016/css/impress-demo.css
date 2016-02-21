@@ -1,0 +1,883 @@
+/*
+    So you like the style of impress.js demo?
+    Or maybe you are just curious how it was done?
+
+    You couldn't find a better place to find out!
+
+    Welcome to the stylesheet impress.js demo presentation.
+
+    Please remember that it is not meant to be a part of impress.js and is
+    not required by impress.js.
+    I expect that anyone creating a presentation for impress.js would create
+    their own set of styles.
+
+    But feel free to read through it and learn how to get the most of what
+    impress.js provides.
+
+    And let me be your guide.
+
+    Shall we begin?
+*/
+
+
+/*
+    We start with a good ol' reset.
+    That's the one by Eric Meyer http://meyerweb.com/eric/tools/css/reset/
+
+    You can probably argue if it is needed here, or not, but for sure it
+    doesn't do any harm and gives us a fresh start.
+*/
+
+html, body, div, span, applet, object, iframe,
+abbr, acronym, address, big, cite,
+del, dfn, img, ins, kbd, q, s, samp,
+var,
+center,
+fieldset, form, label, legend,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+/*
+    Now here is when interesting things start to appear.
+
+    We set up <body> styles with default font and nice gradient in the background.
+    And yes, there is a lot of repetition there because of -prefixes but we don't
+    want to leave anybody behind.
+*/
+body {
+  font-family: 'DejaVu Sans', sans-serif;
+  min-height: 740px;
+
+  background: #fff;
+}
+
+#background {
+  position: relative;
+  width: auto;
+  height: 100%;
+}
+
+#background img {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+
+  opacity: 0.15;
+
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+#background p {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+
+  font-weight: bold;
+  font-size: 16px;
+  text-align: right;
+  line-height: 1.5;
+
+  opacity: 0;
+
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+/*
+    Now let's bring some text styles back ...
+*/
+b, strong { font-weight: bold }
+i, em { font-style: italic }
+
+/*
+    Because the main point behind the impress.js demo is to demo impress.js
+    we display a fallback message for users with browsers that don't support
+    all the features required by it.
+
+    All of the content will be still fully accessible for them, but I want
+    them to know that they are missing something - that's what the demo is
+    about, isn't it?
+
+    And then we hide the message, when support is detected in the browser.
+*/
+
+.fallback-message {
+    font-family: sans-serif;
+    line-height: 1.3;
+
+    width: 780px;
+    padding: 10px 10px 0;
+    margin: 20px auto;
+
+    border: 1px solid #E4C652;
+    border-radius: 10px;
+    background: #EEDC94;
+}
+
+.fallback-message p {
+    margin-bottom: 10px;
+}
+
+.impress-supported .fallback-message {
+    display: none;
+}
+
+/*
+    Now let's style the presentation steps.
+
+    We start with basics to make sure it displays correctly in everywhere ...
+*/
+
+.step {
+    position: relative;
+    width: 900px;
+    padding: 40px;
+    margin: 20px auto;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    -ms-box-sizing:     border-box;
+    -o-box-sizing:      border-box;
+    box-sizing:         border-box;
+
+    font-size: 32px;
+    line-height: 1.5;
+}
+
+/*
+    ... and we enhance the styles for impress.js.
+
+    Basically we remove the margin and make inactive steps a little bit transparent.
+*/
+.impress-enabled .step {
+    margin: 0;
+}
+
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+pre {
+  border: 1px solid #888;
+  border-radius: 10px;
+  background-color: #ddd;
+  line-height: 1.0;
+  width: auto;
+  text-align: center;
+  padding: 10px;
+}
+
+a, a:visited {
+  color: blue;
+}
+
+/* -------------------------------------------------------------------
+ * Title.
+ * ------------------------------------------------------------------- */
+
+.gfx-title {
+  width: 900px;
+  height: 500px;
+}
+
+.gfx-title h1,
+.gfx-title h2 {
+  font-size: 40px;
+}
+
+.impress-on-title #background img,
+.impress-on-title #background p {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------
+ * Graphics stack schema.
+ * ------------------------------------------------------------------- */
+
+.gfx-component, .gfx-todo {
+  border: 4px solid #000;
+  border-radius: 20px;
+  width: 900px;
+  height: 600px;
+}
+
+#gfx-component-sessions-1 div,
+#gfx-component-sessions-2 div {
+  text-align: center;
+}
+#gfx-component-sessions-1 img,
+#gfx-component-sessions-2 img {
+  width: 800px;
+}
+
+#gfx-component-gpgpu-1 img {
+  float: right;
+  width: 200px;
+}
+#gfx-component-gpgpu-2 div,
+#gfx-component-gpgpu-3 div {
+  text-align: center;
+  opacity: 0;
+}
+#gfx-component-gpgpu-2 div p,
+#gfx-component-gpgpu-3 div p {
+  text-align: center;
+}
+#gfx-component-gpgpu-2 div img,
+#gfx-component-gpgpu-3 div img {
+  height: 350px;
+}
+.impress-on-gfx-component-gpgpu-2 #gfx-component-gpgpu-1 div,
+.impress-on-gfx-component-gpgpu-2 #gfx-component-gpgpu-3 div {
+  opacity: 0;
+}
+.impress-on-gfx-component-gpgpu-2 #gfx-component-gpgpu-2 div {
+  opacity: 1;
+}
+.impress-on-gfx-component-gpgpu-3 #gfx-component-gpgpu-1 div,
+.impress-on-gfx-component-gpgpu-3 #gfx-component-gpgpu-2 div {
+  opacity: 0;
+}
+.impress-on-gfx-component-gpgpu-3 #gfx-component-gpgpu-3 div {
+  opacity: 1;
+}
+
+#gfx-component-xserver img,
+#gfx-component-mesa img {
+  float: right;
+  width: 200px;
+  margin-left: 50px;
+}
+
+#gfx-component-drm-2 table {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+#gfx-component-drm-2 td {
+  width: 25%;
+  padding: 0px 10px;
+}
+
+#gfx-component-drm-2 td p {
+  text-align: center;
+}
+
+#gfx-component-drm-core p {
+  background-color: #8ac4f6;
+  border-radius: 10px;
+
+  margin-bottom: 0px;
+}
+
+#gfx-component-drm-drivers p {
+  background-color: #c6e5ff;
+  border-radius: 10px;
+
+  margin-top: 20px;
+}
+
+#gfx-component-drm-2 h3,
+#gfx-component-drm-3 h3 {
+  opacity: 0;
+}
+#gfx-component-drm-2 div,
+#gfx-component-drm-3 div {
+  text-align: center;
+  opacity: 0;
+}
+.impress-on-gfx-component-drm-2 #gfx-component-drm-1 div,
+.impress-on-gfx-component-drm-2 #gfx-component-drm-3 div {
+  opacity: 0;
+}
+.impress-on-gfx-component-drm-2 #gfx-component-drm-2 div {
+  opacity: 1;
+}
+.impress-on-gfx-component-drm-3 #gfx-component-drm-1 div,
+.impress-on-gfx-component-drm-3 #gfx-component-drm-2 div {
+  opacity: 0;
+}
+.impress-on-gfx-component-drm-3 #gfx-component-drm-3 div {
+  opacity: 1;
+}
+
+#gfx-overview-kernel hr {
+  margin: 0px;
+  border: solid 1px #888;
+}
+
+#gfx-overview-kernel p {
+  margin: 0px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #888;
+}
+
+/*
+ * Zoom in/out animation on the Graphics stack schema.
+ */
+
+/* Zooming out. */
+.gfx-component > h3,
+.gfx-todo > h3 {
+  margin: 0px;
+
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+
+  -webkit-transition: font-size 1s 0.2s;
+  -moz-transition: font-size 1s 0.2s;
+  -ms-transition: font-size 1s 0.2s;
+  -o-transition: font-size 1s 0.2s;
+  transition: font-size 1s 0.2s;
+}
+
+.gfx-component > div,
+.gfx-todo > div {
+  opacity: 0;
+
+  /* When it disappears. */
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+/* Zooming in. */
+.impress-on-gfx-component-sessions-1 .gfx-component > h3,
+.impress-on-gfx-component-sessions-2 .gfx-component > h3,
+.impress-on-gfx-component-gpgpu-1 .gfx-component > h3,
+.impress-on-gfx-component-gpgpu-2 .gfx-component > h3,
+.impress-on-gfx-component-gpgpu-3 .gfx-component > h3,
+.impress-on-gfx-component-xserver .gfx-component > h3,
+.impress-on-gfx-component-mesa .gfx-component > h3,
+.impress-on-gfx-component-input .gfx-component > h3,
+.impress-on-gfx-component-drm-1 .gfx-component > h3,
+.impress-on-gfx-component-drm-2 .gfx-component > h3,
+.impress-on-gfx-component-drm-3 .gfx-component > h3,
+.impress-on-todo-xserver-1 .gfx-component > h3,
+.impress-on-todo-xserver-2 .gfx-component > h3,
+.impress-on-todo-xserver-3 .gfx-component > h3,
+.impress-on-todo-xserver-4 .gfx-component > h3,
+.impress-on-todo-xserver-5 .gfx-component > h3,
+.impress-on-todo-mesa-1 .gfx-component > h3,
+.impress-on-todo-mesa-2 .gfx-component > h3,
+.impress-on-todo-mesa-3 .gfx-component > h3,
+.impress-on-todo-input-1 .gfx-component > h3,
+.impress-on-todo-input-2 .gfx-component > h3,
+.impress-on-todo-input-3 .gfx-component > h3,
+.impress-on-todo-drm-1 .gfx-component > h3,
+.impress-on-todo-drm-2 .gfx-component > h3,
+.impress-on-todo-drm-3 .gfx-component > h3,
+.impress-on-todo-drm-4 .gfx-component > h3,
+.impress-on-todo-drm-5 .gfx-component > h3,
+.impress-on-todo-drm-6 .gfx-component > h3,
+.impress-on-todo-drm-7 .gfx-component > h3,
+.impress-on-todo-drm-8 .gfx-component > h3 {
+  -webkit-transition: font-size 1s 0s;
+  -moz-transition: font-size 1s 0s;
+  -ms-transition: font-size 1s 0s;
+  -o-transition: font-size 1s 0s;
+  transition: font-size 1s 0s;
+}
+
+
+#gfx-component-sessions-1,
+#gfx-component-gpgpu-1 {
+  background-color: #ddfec3;
+}
+
+#gfx-component-xserver,
+#gfx-component-mesa {
+  background-color: #faffb1;
+}
+
+#gfx-component-input,
+#gfx-component-drm-1 {
+  background-color: #ffb3b1;
+}
+
+.impress-on-gfx-component-sessions-1 .gfx-component > div,
+.impress-on-gfx-component-sessions-2 .gfx-component > div,
+.impress-on-gfx-component-gpgpu-1 .gfx-component > div,
+.impress-on-gfx-component-gpgpu-2 .gfx-component > div,
+.impress-on-gfx-component-gpgpu-3 .gfx-component > div,
+.impress-on-gfx-component-xserver .gfx-component > div,
+.impress-on-gfx-component-mesa .gfx-component > div,
+.impress-on-gfx-component-input .gfx-component > div,
+.impress-on-gfx-component-drm-1 .gfx-component > div,
+.impress-on-gfx-component-drm-2 .gfx-component > div,
+.impress-on-gfx-component-drm-3 .gfx-component > div,
+.impress-on-todo-xserver-1 .gfx-todo > div,
+.impress-on-todo-xserver-2 .gfx-todo > div,
+.impress-on-todo-xserver-3 .gfx-todo > div,
+.impress-on-todo-xserver-4 .gfx-todo > div,
+.impress-on-todo-xserver-5 .gfx-todo > div,
+.impress-on-todo-mesa-1 .gfx-todo > div,
+.impress-on-todo-mesa-2 .gfx-todo > div,
+.impress-on-todo-mesa-3 .gfx-todo > div,
+.impress-on-todo-input-1 .gfx-todo > div,
+.impress-on-todo-input-2 .gfx-todo > div,
+.impress-on-todo-input-3 .gfx-todo > div,
+.impress-on-todo-drm-1 .gfx-todo > div,
+.impress-on-todo-drm-2 .gfx-todo > div,
+.impress-on-todo-drm-3 .gfx-todo > div,
+.impress-on-todo-drm-4 .gfx-todo > div,
+.impress-on-todo-drm-5 .gfx-todo > div,
+.impress-on-todo-drm-6 .gfx-todo > div,
+.impress-on-todo-drm-7 .gfx-todo > div,
+.impress-on-todo-drm-8 .gfx-todo > div {
+  opacity: 1;
+
+  /* When it appears. */
+  -webkit-transition: opacity 1s 0.5s;
+  -moz-transition: opacity 1s 0.5s;
+  -ms-transition: opacity 1s 0.5s;
+  -o-transition: opacity 1s 0.5s;
+  transition: opacity 1s 0.5s;
+}
+
+.impress-on-gfx-overview-userland .gfx-component > h3,
+.impress-on-gfx-overview-kernel .gfx-component > h3,
+.impress-on-gfx-overview-1 .gfx-component > h3,
+.impress-on-gfx-overview-2 .gfx-component > h3,
+.impress-on-todo-userland-1 .gfx-component > h3,
+.impress-on-todo-userland-2 .gfx-component > h3,
+.impress-on-todo-kernel-1 .gfx-component > h3,
+.impress-on-todo-kernel-2 .gfx-component > h3 {
+  font-size: 96px;
+}
+
+/* -------------------------------------------------------------------
+ * TODO.
+ * ------------------------------------------------------------------- */
+
+.gfx-todo {
+  border-color: transparent;
+}
+
+.gfx-todo > h3 {
+  opacity: 0;
+}
+
+.impress-on-todo-userland-1 #gfx-component-sessions-1,
+.impress-on-todo-userland-1 #gfx-component-gpgpu-1,
+.impress-on-todo-userland-1 #gfx-component-input,
+.impress-on-todo-userland-1 #gfx-component-drm-1,
+.impress-on-todo-userland-2 #gfx-component-sessions-1,
+.impress-on-todo-userland-2 #gfx-component-gpgpu-1,
+.impress-on-todo-userland-2 #gfx-component-input,
+.impress-on-todo-userland-2 #gfx-component-drm-1,
+.impress-on-todo-xserver-1 #gfx-component-sessions-1,
+.impress-on-todo-xserver-1 #gfx-component-gpgpu-1,
+.impress-on-todo-xserver-1 #gfx-component-input,
+.impress-on-todo-xserver-1 #gfx-component-drm-1,
+.impress-on-todo-xserver-2 #gfx-component-sessions-1,
+.impress-on-todo-xserver-2 #gfx-component-gpgpu-1,
+.impress-on-todo-xserver-2 #gfx-component-input,
+.impress-on-todo-xserver-2 #gfx-component-drm-1,
+.impress-on-todo-xserver-3 #gfx-component-sessions-1,
+.impress-on-todo-xserver-3 #gfx-component-gpgpu-1,
+.impress-on-todo-xserver-3 #gfx-component-input,
+.impress-on-todo-xserver-3 #gfx-component-drm-1,
+.impress-on-todo-xserver-4 #gfx-component-sessions-1,
+.impress-on-todo-xserver-4 #gfx-component-gpgpu-1,
+.impress-on-todo-xserver-4 #gfx-component-input,
+.impress-on-todo-xserver-4 #gfx-component-drm-1,
+.impress-on-todo-xserver-5 #gfx-component-sessions-1,
+.impress-on-todo-xserver-5 #gfx-component-gpgpu-1,
+.impress-on-todo-xserver-5 #gfx-component-input,
+.impress-on-todo-xserver-5 #gfx-component-drm-1,
+.impress-on-todo-mesa-1 #gfx-component-sessions-1,
+.impress-on-todo-mesa-1 #gfx-component-gpgpu-1,
+.impress-on-todo-mesa-1 #gfx-component-input,
+.impress-on-todo-mesa-1 #gfx-component-drm-1,
+.impress-on-todo-mesa-2 #gfx-component-sessions-1,
+.impress-on-todo-mesa-2 #gfx-component-gpgpu-1,
+.impress-on-todo-mesa-2 #gfx-component-input,
+.impress-on-todo-mesa-2 #gfx-component-drm-1,
+.impress-on-todo-mesa-3 #gfx-component-sessions-1,
+.impress-on-todo-mesa-3 #gfx-component-gpgpu-1,
+.impress-on-todo-mesa-3 #gfx-component-input,
+.impress-on-todo-mesa-3 #gfx-component-drm-1,
+.impress-on-todo-kernel-1 #gfx-component-sessions-1,
+.impress-on-todo-kernel-1 #gfx-component-gpgpu-1,
+.impress-on-todo-kernel-1 #gfx-component-xserver,
+.impress-on-todo-kernel-1 #gfx-component-mesa,
+.impress-on-todo-kernel-2 #gfx-component-sessions-1,
+.impress-on-todo-kernel-2 #gfx-component-gpgpu-1,
+.impress-on-todo-kernel-2 #gfx-component-xserver,
+.impress-on-todo-kernel-2 #gfx-component-mesa,
+.impress-on-todo-input-1 #gfx-component-sessions-1,
+.impress-on-todo-input-1 #gfx-component-gpgpu-1,
+.impress-on-todo-input-1 #gfx-component-xserver,
+.impress-on-todo-input-1 #gfx-component-mesa,
+.impress-on-todo-input-2 #gfx-component-sessions-1,
+.impress-on-todo-input-2 #gfx-component-gpgpu-1,
+.impress-on-todo-input-2 #gfx-component-xserver,
+.impress-on-todo-input-2 #gfx-component-mesa,
+.impress-on-todo-input-3 #gfx-component-sessions-1,
+.impress-on-todo-input-3 #gfx-component-gpgpu-1,
+.impress-on-todo-input-3 #gfx-component-xserver,
+.impress-on-todo-input-3 #gfx-component-mesa,
+.impress-on-todo-drm-1 #gfx-component-sessions-1,
+.impress-on-todo-drm-1 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-1 #gfx-component-xserver,
+.impress-on-todo-drm-1 #gfx-component-mesa,
+.impress-on-todo-drm-2 #gfx-component-sessions-1,
+.impress-on-todo-drm-2 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-2 #gfx-component-xserver,
+.impress-on-todo-drm-2 #gfx-component-mesa,
+.impress-on-todo-drm-3 #gfx-component-sessions-1,
+.impress-on-todo-drm-3 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-3 #gfx-component-xserver,
+.impress-on-todo-drm-3 #gfx-component-mesa,
+.impress-on-todo-drm-4 #gfx-component-sessions-1,
+.impress-on-todo-drm-4 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-4 #gfx-component-xserver,
+.impress-on-todo-drm-4 #gfx-component-mesa,
+.impress-on-todo-drm-5 #gfx-component-sessions-1,
+.impress-on-todo-drm-5 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-5 #gfx-component-xserver,
+.impress-on-todo-drm-5 #gfx-component-mesa,
+.impress-on-todo-drm-6 #gfx-component-sessions-1,
+.impress-on-todo-drm-6 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-6 #gfx-component-xserver,
+.impress-on-todo-drm-6 #gfx-component-mesa,
+.impress-on-todo-drm-7 #gfx-component-sessions-1,
+.impress-on-todo-drm-7 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-7 #gfx-component-xserver,
+.impress-on-todo-drm-7 #gfx-component-mesa,
+.impress-on-todo-drm-8 #gfx-component-sessions-1,
+.impress-on-todo-drm-8 #gfx-component-gpgpu-1,
+.impress-on-todo-drm-8 #gfx-component-xserver,
+.impress-on-todo-drm-8 #gfx-component-mesa {
+  opacity: 0.2;
+}
+.impress-on-todo-userland-1 #gfx-component-sessions-2,
+.impress-on-todo-userland-1 #gfx-component-gpgpu-2,
+.impress-on-todo-userland-1 #gfx-component-gpgpu-3,
+.impress-on-todo-userland-1 #gfx-component-drm-2,
+.impress-on-todo-userland-1 #gfx-component-drm-3,
+.impress-on-todo-userland-2 #gfx-component-sessions-2,
+.impress-on-todo-userland-2 #gfx-component-gpgpu-2,
+.impress-on-todo-userland-2 #gfx-component-gpgpu-3,
+.impress-on-todo-userland-2 #gfx-component-drm-2,
+.impress-on-todo-userland-2 #gfx-component-drm-3,
+.impress-on-todo-xserver-1 #gfx-component-sessions-2,
+.impress-on-todo-xserver-1 #gfx-component-gpgpu-2,
+.impress-on-todo-xserver-1 #gfx-component-gpgpu-3,
+.impress-on-todo-xserver-1 #gfx-component-drm-2,
+.impress-on-todo-xserver-1 #gfx-component-drm-3,
+.impress-on-todo-xserver-2 #gfx-component-sessions-2,
+.impress-on-todo-xserver-2 #gfx-component-gpgpu-2,
+.impress-on-todo-xserver-2 #gfx-component-gpgpu-3,
+.impress-on-todo-xserver-2 #gfx-component-drm-2,
+.impress-on-todo-xserver-2 #gfx-component-drm-3,
+.impress-on-todo-xserver-3 #gfx-component-sessions-2,
+.impress-on-todo-xserver-3 #gfx-component-gpgpu-2,
+.impress-on-todo-xserver-3 #gfx-component-gpgpu-3,
+.impress-on-todo-xserver-3 #gfx-component-drm-2,
+.impress-on-todo-xserver-3 #gfx-component-drm-3,
+.impress-on-todo-xserver-4 #gfx-component-sessions-2,
+.impress-on-todo-xserver-4 #gfx-component-gpgpu-2,
+.impress-on-todo-xserver-4 #gfx-component-gpgpu-3,
+.impress-on-todo-xserver-4 #gfx-component-drm-2,
+.impress-on-todo-xserver-4 #gfx-component-drm-3,
+.impress-on-todo-xserver-5 #gfx-component-sessions-2,
+.impress-on-todo-xserver-5 #gfx-component-gpgpu-2,
+.impress-on-todo-xserver-5 #gfx-component-gpgpu-3,
+.impress-on-todo-xserver-5 #gfx-component-drm-2,
+.impress-on-todo-xserver-5 #gfx-component-drm-3,
+.impress-on-todo-mesa-1 #gfx-component-sessions-2,
+.impress-on-todo-mesa-1 #gfx-component-gpgpu-2,
+.impress-on-todo-mesa-1 #gfx-component-gpgpu-3,
+.impress-on-todo-mesa-1 #gfx-component-drm-2,
+.impress-on-todo-mesa-1 #gfx-component-drm-3,
+.impress-on-todo-mesa-2 #gfx-component-sessions-2,
+.impress-on-todo-mesa-2 #gfx-component-gpgpu-2,
+.impress-on-todo-mesa-2 #gfx-component-gpgpu-3,
+.impress-on-todo-mesa-2 #gfx-component-drm-2,
+.impress-on-todo-mesa-2 #gfx-component-drm-3,
+.impress-on-todo-mesa-3 #gfx-component-sessions-2,
+.impress-on-todo-mesa-3 #gfx-component-gpgpu-2,
+.impress-on-todo-mesa-3 #gfx-component-gpgpu-3,
+.impress-on-todo-mesa-3 #gfx-component-drm-2,
+.impress-on-todo-mesa-3 #gfx-component-drm-3,
+.impress-on-todo-kernel-1 #gfx-component-sessions-2,
+.impress-on-todo-kernel-1 #gfx-component-gpgpu-2,
+.impress-on-todo-kernel-1 #gfx-component-gpgpu-3,
+.impress-on-todo-kernel-1 #gfx-component-drm-2,
+.impress-on-todo-kernel-1 #gfx-component-drm-3,
+.impress-on-todo-kernel-2 #gfx-component-sessions-2,
+.impress-on-todo-kernel-2 #gfx-component-gpgpu-2,
+.impress-on-todo-kernel-2 #gfx-component-gpgpu-3,
+.impress-on-todo-kernel-2 #gfx-component-drm-2,
+.impress-on-todo-kernel-2 #gfx-component-drm-3,
+.impress-on-todo-input-1 #gfx-component-sessions-2,
+.impress-on-todo-input-1 #gfx-component-gpgpu-2,
+.impress-on-todo-input-1 #gfx-component-gpgpu-3,
+.impress-on-todo-input-1 #gfx-component-drm-2,
+.impress-on-todo-input-1 #gfx-component-drm-3,
+.impress-on-todo-input-2 #gfx-component-sessions-2,
+.impress-on-todo-input-2 #gfx-component-gpgpu-2,
+.impress-on-todo-input-2 #gfx-component-gpgpu-3,
+.impress-on-todo-input-2 #gfx-component-drm-2,
+.impress-on-todo-input-2 #gfx-component-drm-3,
+.impress-on-todo-input-3 #gfx-component-sessions-2,
+.impress-on-todo-input-3 #gfx-component-gpgpu-2,
+.impress-on-todo-input-3 #gfx-component-gpgpu-3,
+.impress-on-todo-input-3 #gfx-component-drm-2,
+.impress-on-todo-input-3 #gfx-component-drm-3,
+.impress-on-todo-drm-1 #gfx-component-sessions-2,
+.impress-on-todo-drm-1 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-1 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-1 #gfx-component-drm-2,
+.impress-on-todo-drm-1 #gfx-component-drm-3,
+.impress-on-todo-drm-2 #gfx-component-sessions-2,
+.impress-on-todo-drm-2 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-2 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-2 #gfx-component-drm-2,
+.impress-on-todo-drm-2 #gfx-component-drm-3,
+.impress-on-todo-drm-3 #gfx-component-sessions-2,
+.impress-on-todo-drm-3 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-3 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-3 #gfx-component-drm-2,
+.impress-on-todo-drm-3 #gfx-component-drm-3,
+.impress-on-todo-drm-4 #gfx-component-sessions-2,
+.impress-on-todo-drm-4 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-4 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-4 #gfx-component-drm-2,
+.impress-on-todo-drm-4 #gfx-component-drm-3,
+.impress-on-todo-drm-5 #gfx-component-sessions-2,
+.impress-on-todo-drm-5 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-5 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-5 #gfx-component-drm-2,
+.impress-on-todo-drm-5 #gfx-component-drm-3,
+.impress-on-todo-drm-6 #gfx-component-sessions-2,
+.impress-on-todo-drm-6 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-6 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-6 #gfx-component-drm-2,
+.impress-on-todo-drm-6 #gfx-component-drm-3,
+.impress-on-todo-drm-7 #gfx-component-sessions-2,
+.impress-on-todo-drm-7 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-7 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-7 #gfx-component-drm-2,
+.impress-on-todo-drm-7 #gfx-component-drm-3,
+.impress-on-todo-drm-8 #gfx-component-sessions-2,
+.impress-on-todo-drm-8 #gfx-component-gpgpu-2,
+.impress-on-todo-drm-8 #gfx-component-gpgpu-3,
+.impress-on-todo-drm-8 #gfx-component-drm-2,
+.impress-on-todo-drm-8 #gfx-component-drm-3 {
+  opacity: 0;
+}
+
+.gfx-todo li {
+  opacity: 0.5;
+}
+
+.impress-on-todo-xserver-1 li.todo-item-1,
+.impress-on-todo-xserver-2 li.todo-item-2,
+.impress-on-todo-xserver-3 li.todo-item-3,
+.impress-on-todo-xserver-4 li.todo-item-4,
+.impress-on-todo-xserver-5 li.todo-item-5,
+.impress-on-todo-mesa-1 li.todo-item-1,
+.impress-on-todo-mesa-2 li.todo-item-2,
+.impress-on-todo-mesa-3 li.todo-item-3,
+.impress-on-todo-input-1 li.todo-item-1,
+.impress-on-todo-input-2 li.todo-item-2,
+.impress-on-todo-input-3 li.todo-item-3,
+.impress-on-todo-drm-1 li.todo-item-1,
+.impress-on-todo-drm-2 li.todo-item-2,
+.impress-on-todo-drm-3 li.todo-item-3,
+.impress-on-todo-drm-4 li.todo-item-4,
+.impress-on-todo-drm-5 li.todo-item-5,
+.impress-on-todo-drm-6 li.todo-item-6,
+.impress-on-todo-drm-7 li.todo-item-7,
+.impress-on-todo-drm-8 li.todo-item-8 {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------
+ * Workflow.
+ * ------------------------------------------------------------------- */
+
+.gfx-workflow {
+  width: 900px;
+  height: 700px;
+
+  /* When it disappears. */
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.gfx-workflow > div {
+  opacity: 0;
+
+  /* When it disappears. */
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.gfx-workflow ul {
+  white-space: nowrap;
+}
+
+#workflow-3 td {
+  width: 50%;
+}
+
+#workflow-2 h3,
+#workflow-3 h3,
+#closing h3 {
+  opacity: 0;
+}
+
+#workflow-2 div,
+#workflow-3 div,
+#closing div {
+  opacity: 0;
+}
+.impress-on-workflow-2 #workflow-2 div,
+.impress-on-workflow-3 #workflow-3 div,
+.impress-on-closing #closing div {
+  opacity: 1;
+}
+
+.impress-on-workflow-2 #workflow-1 div,
+.impress-on-workflow-2 #workflow-3 div,
+.impress-on-workflow-2 #closing div,
+.impress-on-workflow-3 #workflow-1 div,
+.impress-on-workflow-3 #workflow-2 div,
+.impress-on-workflow-3 #closing div,
+.impress-on-closing #workflow-1 div,
+.impress-on-closing #workflow-2 div,
+.impress-on-closing #workflow-3 div {
+  opacity: 0;
+}
+
+.impress-on-workflow-1 .gfx-workflow > div,
+.impress-on-workflow-2 .gfx-workflow > div,
+.impress-on-workflow-3 .gfx-workflow > div,
+.impress-on-closing .gfx-workflow > div {
+  opacity: 1;
+
+  /* When it appears. */
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.impress-on-workflow-3 #closing h3,
+.impress-on-title #workflow-1 h3,
+.impress-on-closing #workflow-1 h3 {
+  opacity: 0;
+
+  /* When it disappears. */
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.impress-on-title #closing h3,
+.impress-on-closing #closing h3 {
+  opacity: 1;
+
+  /* When it appears. */
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+/*
+    And as the last thing there is a workaround for quite strange bug.
+    It happens a lot in Chrome. I don't remember if I've seen it in Firefox.
+
+    Sometimes the element positioned in 3D (especially when it's moved back
+    along Z axis) is not clickable, because it falls 'behind' the <body>
+    element.
+
+    To prevent this, I decided to make <body> non clickable by setting
+    pointer-events property to `none` value.
+    Value if this property is inherited, so to make everything else clickable
+    I bring it back on the #impress element.
+
+    If you want to know more about `pointer-events` here are some docs:
+    https://developer.mozilla.org/en/CSS/pointer-events
+
+    There is one very important thing to notice about this workaround - it makes
+    everything 'unclickable' except what's in #impress element.
+
+    So use it wisely ... or don't use at all.
+*/
+.impress-enabled          { pointer-events: none }
+.impress-enabled #impress { pointer-events: auto }
+
+/*
+    There is one funny thing I just realized.
+
+    Thanks to this workaround above everything except #impress element is invisible
+    for click events. That means that the hint element is also not clickable.
+    So basically all of this transforms and delayed transitions trickery was probably
+    not needed at all...
+
+    But it was fun to learn about it, wasn't it?
+*/
+
+/*
+    That's all I have for you in this file.
+    Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
+    for you.
+*/

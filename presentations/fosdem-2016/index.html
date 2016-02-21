@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1024" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Contributing to the Graphics stack on FreeBSD</title>
+
+  <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+  <meta name="author" content="Jean-Sébastien Pédron" />
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+  <link href="css/impress-demo.css" rel="stylesheet" />
+
+  <link rel="shortcut icon" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+
+  <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by
+    impress.js, so you are presented with a simplified version of this
+    presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>,
+    <b>Safari</b> or <b>Firefox</b> browser.</p>
+  </div>
+
+
+  <div id="background">
+    <img src="img/FreeBSD_Logo.png" alt=""/>
+    <p>Jean-Sébastien Pédron <a href="mailto:dumbbell@FreeBSD.org">&lt;dumbbell@FreeBSD.org&gt;</a><br/>
+    FOSDEM 2016</p>
+  </div>
+  <div id="impress">
+
+    <div id="title" class="step gfx-title" data-x="0" data-y="-1000">
+      <h1>Contributing to the Graphics stack on FreeBSD</h1>
+    </div>
+
+    <!--
+    Overview of the graphics stack.
+    -->
+
+    <div id="what-is-the-graphics-stack" class="step gfx-title" data-x="0" data-y="0">
+      <h2>What is the Graphics stack?</h2>
+    </div>
+
+    <!-- User of the Graphics stack. -->
+    <div id="gfx-component-sessions-1" class="step gfx-component"
+      data-x="-500" data-y="1000">
+      <h3>Graphical environment</h3>
+      <div>
+        <img src="img/screenshot-800.png" alt="GNOME Shell screenshot" />
+      </div>
+    </div>
+    <div id="showoff-3d-1" class="step"
+      data-x="0" data-y="500" data-z="500" data-rotate-x="60">
+    </div>
+    <!--div id="showoff-3d-2" class="step"
+      data-x="0" data-y="3000" data-z="500" data-rotate-x="60">
+    </div-->
+    <!--div id="showoff-3d-2" class="step"
+      data-x="0" data-y="500" data-z="-500" data-rotate-x="120">
+    </div-->
+    <div id="showoff-3d-2" class="step"
+      data-x="0" data-y="3000" data-z="500" data-rotate-x="-60">
+    </div>
+    <div id="gfx-component-sessions-2" class="step"
+      data-x="-500" data-y="1000">
+    </div>
+
+    <div id="gfx-component-gpgpu-1" class="step gfx-component"
+      data-x="500" data-y="1000">
+      <h3>GPGPU</h3>
+      <div>
+        <p>Use the GPU to perform general purpose computations.</p>
+        <img src="img/OpenCL_Logo.png" alt="" />
+        <p>Common APIs:</p>
+        <ul>
+          <li>OpenCL</li>
+          <li>NVIDIA's CUDA</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="gfx-component-gpgpu-2" class="step gfx-component"
+      data-x="500" data-y="1000">
+      <h3>GPGPU</h3>
+      <div>
+        <p>Scientific computations and simulations</p>
+        <img src="img/NOVA.jpg" alt="" title="Credit: ONERA" />
+      </div>
+    </div>
+
+    <div id="gfx-component-gpgpu-3" class="step gfx-component"
+      data-x="500" data-y="1000">
+      <h3>GPGPU</h3>
+      <div>
+        <p>Virtual currency mining</p>
+        <img src="img/bitcoin-rig.jpg" alt="" />
+      </div>
+    </div>
+
+    <div id="gfx-overview-userland" class="step"
+    data-x="0" data-y="1350" data-scale="2">
+    </div>
+
+    <!-- Userland parts. -->
+    <div id="gfx-component-xserver" class="step gfx-component"
+      data-x="-500" data-y="1700">
+      <h3>X.Org server</h3>
+      <div>
+        <img src="img/X.Org_Logo.svg" alt="" />
+        <ul>
+          <li><p>Provides 2D API and input events for applications and
+            window managers.</p></li>
+          <li><p>Configures input and video devices</p></li>
+          <li><p>Uses "DDX" (device-dependent modules, the
+            <tt>xf86-input-*</tt> and <tt>xf86-video-*</tt> packages) to
+            access underlying drivers.</p></li>
+        </ul>
+      </div>
+    </div>
+    <div id="gfx-component-mesa" class="step gfx-component"
+      data-x="500" data-y="1700">
+      <h3>Mesa</h3>
+      <div>
+        <img src="img/Mesa.png" alt="" />
+        <ul>
+          <li><p>Provides 3D APIs for applications and compositing window managers.</p></li>
+          <li><p>Provides OpenCL for some GPUs.</p></li>
+          <li><p>Allows to do hardware-assisted video decoding and
+          encoding.</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="gfx-overview-kernel" class="step"
+    data-x="0" data-y="2100" data-scale="2">
+    <div style="height: 400px;"></div>
+    <p>Userland</p>
+    <hr/>
+    <p>Kernel</p>
+    <div style="height: 350px"></div>
+    <p>Kernel</p>
+    <hr/>
+    <p>Hardware</p>
+    </div>
+
+    <!-- Kernel parts. -->
+    <div id="gfx-component-input" class="step gfx-component"
+    data-x="-500" data-y="2500">
+      <h3>Input device drivers</h3>
+      <div>
+        <ul>
+          <li><p>Reports input events to userland.</p></li>
+          <li><p>On FreeBSD, used either by TTY and <tt>moused(8)</tt> or
+          directly by X.Org DDX (<tt>xf86-input-*</tt>).</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="gfx-component-drm-1" class="step gfx-component"
+    data-x="500" data-y="2500">
+      <h3>DRM</h3>
+      <div>
+        <p>Drives video devices:</p>
+        <ul>
+          <li>Initializes hardware.</li>
+          <li>Manages buffers between system and video memory.</li>
+          <li>Configures output connectors.</li>
+          <li>Accessed through file I/O and ioctls.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="gfx-component-drm-2" class="step gfx-component"
+    data-x="500" data-y="2500">
+      <h3>DRM</h3>
+      <div>
+        <table>
+          <tr id="gfx-component-drm-core">
+            <td colspan="4">
+              <p>VFS</p>
+            </td>
+          </tr>
+          <tr id="gfx-component-drm-drivers">
+            <td><p>ufs</p></td>
+            <td><p>zfs</p></td>
+            <td><p>msdosfs</p></td>
+            <td><p>...</p></td>
+          </tr>
+        </table>
+        =
+        <table>
+          <tr id="gfx-component-drm-core">
+            <td colspan="4">
+              <p>DRM Core</p>
+            </td>
+          </tr>
+          <tr id="gfx-component-drm-drivers">
+            <td><p>i915</p></td>
+            <td><p>radeon</p></td>
+            <td><p>nouveau</p></td>
+            <td><p>...</p></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Final overview. -->
+    <div id="gfx-overview-1" class="step"
+    data-x="0" data-y="1800" data-z="3000">
+    </div>
+
+    <!--
+    TODO.
+    -->
+
+    <!-- TODO in userland. -->
+    <div id="todo-userland-1" class="step"
+      data-x="0" data-y="1700" data-z="1000">
+    </div>
+
+    <div id="todo-xserver-1" class="step gfx-todo"
+      data-x="-500" data-y="1700">
+      <h3>X.Org server</h3>
+      <div>
+        <p>xserver 1.17 in the Ports tree.</p>
+        <ol>
+          <li class="todo-item-1">General maintenance; xserver 1.18 in progress.</li>
+          <li class="todo-item-2"><tt>signalfd</tt> equivalent in FreeBSD.</li>
+          <li class="todo-item-3"><tt>libdevq</tt> / udev wrapper.</li>
+          <li class="todo-item-4"><tt>libinput</tt>.</li>
+          <li class="todo-item-5">systemd-logind / xserver without root privileges.</li>
+        </ol>
+      </div>
+    </div>
+    <div id="todo-xserver-2" class="step gfx-todo"
+      data-x="-500" data-y="1700">
+    </div>
+    <div id="todo-xserver-3" class="step gfx-todo"
+      data-x="-500" data-y="1700">
+    </div>
+    <div id="todo-xserver-4" class="step gfx-todo"
+      data-x="-500" data-y="1700">
+    </div>
+    <div id="todo-xserver-5" class="step gfx-todo"
+      data-x="-500" data-y="1700">
+    </div>
+
+    <div id="todo-mesa-1" class="step gfx-todo"
+      data-x="500" data-y="1700">
+      <h3>Mesa</h3>
+      <div>
+        <p>Mesa 11.0 in the Ports tree.</p>
+        <ol>
+          <li class="todo-item-1">General maintenance; Mesa 11.1 in progress.</li>
+          <li class="todo-item-2"><tt>libdevq</tt> / udev wrapper.</li>
+          <li class="todo-item-3">Piglit.</li>
+        </ol>
+      </div>
+    </div>
+    <div id="todo-mesa-2" class="step gfx-todo"
+      data-x="500" data-y="1700">
+    </div>
+    <div id="todo-mesa-3" class="step gfx-todo"
+      data-x="500" data-y="1700">
+    </div>
+
+    <div id="todo-userland-2" class="step"
+      data-x="0" data-y="1700" data-z="1000">
+    </div>
+
+    <!-- TODO in kernel. -->
+    <div id="todo-kernel-1" class="step"
+      data-x="0" data-y="2500" data-z="1000">
+    </div>
+
+    <div id="todo-input-1" class="step gfx-todo"
+      data-x="-500" data-y="2500">
+      <h3>Input device drivers</h3>
+      <div>
+        <p>Need to study what we have and what needs improvement.</p>
+        <ol>
+          <li class="todo-item-1"><tt>evdev</tt>, see <a href="https://wiki.FreeBSD.org/SummerOfCode2014/evdev_Touchscreens">FreeBSD wiki page on this topic</a>.</li>
+          <li class="todo-item-2">TTY, <tt>kbdmux(8)</tt> and multiple keyboards.</li>
+          <li class="todo-item-3">Link between sysctls and <tt>/dev</tt> entries.</li>
+        </ol>
+      </div>
+    </div>
+    <div id="todo-input-2" class="step gfx-todo"
+      data-x="-500" data-y="2500">
+    </div>
+    <div id="todo-input-3" class="step gfx-todo"
+      data-x="-500" data-y="2500">
+    </div>
+
+    <div id="todo-drm-1" class="step gfx-todo"
+      data-x="500" data-y="2500">
+      <h3>DRM</h3>
+      <div>
+        <ol>
+          <li class="todo-item-1">DRM updates to later Linux versions.</li>
+          <li class="todo-item-2">Switch to <tt>linuxkpi</tt>.</li>
+          <li class="todo-item-3">New drivers; <tt>amdgpu</tt>?</li>
+          <li class="todo-item-4">Link between sysctls and <tt>/dev</tt> entries.</li>
+          <li class="todo-item-5"><tt>dmabuf</tt> / DRM PRIME.</li>
+          <li class="todo-item-6">Rename <tt>drm2</tt> to <tt>drm</tt>.</li>
+          <li class="todo-item-7">Backport to <tt>stable/*</tt>, <tt>drm-kmod</tt> port.</li>
+          <li class="todo-item-8">Monitor hotplug notification.</li>
+        </ol>
+      </div>
+    </div>
+    <div id="todo-drm-2" class="step gfx-todo"
+      data-x="500" data-y="2500">
+    </div>
+    <div id="todo-drm-3" class="step gfx-todo"
+      data-x="500" data-y="2500">
+    </div>
+    <div id="todo-drm-4" class="step gfx-todo"
+      data-x="500" data-y="2500">
+    </div>
+    <div id="todo-drm-5" class="step gfx-todo"
+      data-x="500" data-y="2500">
+    </div>
+    <div id="todo-drm-6" class="step gfx-todo"
+      data-x="500" data-y="2500">
+    </div>
+    <div id="todo-drm-7" class="step gfx-todo"
+      data-x="500" data-y="2500">
+    </div>
+    <div id="todo-drm-8" class="step gfx-todo"
+      data-x="500" data-y="2500">
+    </div>
+
+    <!-- Back to overview. -->
+    <div id="gfx-overview-2" class="step"
+    data-x="0" data-y="1800" data-z="3000">
+    </div>
+
+    <!--
+    Workflow.
+    -->
+
+    <div id="workflow-1" class="step gfx-workflow"
+      data-x="2900" data-y="1800" data-z="3000">
+      <h3>Workflow</h3>
+      <div>
+        <p>Everything on GitHub:</p>
+        <ul>
+          <li>Base system:<br/>
+            <a href="http://github.com/freebsd/freebsd-ports-graphics">http://github.com/freebsd/freebsd-base-graphics</a>.</li>
+          <li>Ports tree:<br/>
+            <a href="http://github.com/freebsd/freebsd-ports-graphics">http://github.com/freebsd/freebsd-ports-graphics</a>.</li>
+        </ul>
+        <p>Forked from <a href="http://github.com/freebsd/">official FreeBSD Git mirrors</a>.</p>
+      </div>
+    </div>
+
+    <div id="workflow-2" class="step gfx-workflow"
+      data-x="2900" data-y="1800" data-z="3000">
+      <h3>Workflow</h3>
+      <div>
+        <ul>
+          <li><tt>master</tt> == HEAD in Subversion.</li>
+          <li>Work happens in separate branches.</li>
+        </ul>
+        <!-- TODO: Use Dia to get a nicer schema. -->
+        <pre>+--&gt; <strong>xserver-next</strong> --&gt; HEAD (svn) --+
+|                                  |
+|                                  |
++-------------------- master &lt;-----+</pre>
+      </div>
+    </div>
+
+    <div id="workflow-3" class="step gfx-workflow"
+      data-x="2900" data-y="1800" data-z="3000">
+      <h3>Workflow</h3>
+      <div>
+        <p>More on DRM:</p>
+        <table>
+          <tr>
+            <td>Which target?</td>
+            <td>Which method?</td>
+          </tr>
+          <tr>
+            <td>
+              <ul>
+                <li>Linux 3.9</li>
+                <li>Linux 4.4</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>file-by-file</li>
+                <li>commit-by-commit</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="closing" class="step gfx-workflow"
+      data-x="2900" data-y="1800" data-z="3000">
+      <h3>Closing</h3>
+      <div>
+        <ul>
+          <li>Lot of interesting work.</li>
+          <li>Short and longer projects.</li>
+          <li><strong>Don't be afraid!</strong></li>
+        </ul>
+        <p>Any questions?</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+if ("ontouchstart" in document.documentElement) {
+  document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+  </script>
+
+  <script src="js/impress.js"></script>
+  <script>impress().init();</script>
+
+</body>
+</html>
